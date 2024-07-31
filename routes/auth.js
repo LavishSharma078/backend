@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const passport = require('passport');
+// const passport = require('passport');
 const User = require('../models/User');
 const { check, validationResult } = require('express-validator');
 
@@ -82,14 +82,14 @@ router.post('/login', [
 });
 
 // Google OAuth
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+// router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-router.get('/google/callback', passport.authenticate('google', { session: false }), (req, res) => {
-  const payload = { user: { id: req.user.id } };
-  jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
-    if (err) throw err;
-    res.redirect(`https://frontend-ten-inky.vercel.app/login?token=${token}`);
-  });
-});
+// router.get('/google/callback', passport.authenticate('google', { session: false }), (req, res) => {
+//   const payload = { user: { id: req.user.id } };
+//   jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
+//     if (err) throw err;
+//     res.redirect(`https://frontend-ten-inky.vercel.app/login?token=${token}`);
+//   });
+// });
 
 module.exports = router;
