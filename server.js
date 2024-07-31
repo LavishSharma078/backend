@@ -2,8 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-// const passport = require('passport');
-// require('./config/passport')(passport);
+const passport = require('passport');
+require('./config/passport')(passport);
 
 const authRoutes = require('./routes/auth');
 const taskRoutes = require('./routes/task');
@@ -24,7 +24,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err));
 
-// app.use(passport.initialize());
+app.use(passport.initialize());
 
 app.use('/auth', authRoutes);
 app.use('/tasks', taskRoutes);
